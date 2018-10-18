@@ -13,17 +13,17 @@ class Book extends Component{
         return(
             <div className='book' id={book.id}>
                 <div className='book-top'>
-                    { book.imageLinks?
-                        <div className='book-cover' style={{backgroundImage: `url('${book.imageLinks.thumbnail}')` }}></div>
-                    :null}
-                    <ShelfChange
-                        book={book}
-                        changeShelf={this.props.changeShelf}/>
-                </div>
-                <div className='book-title'>{book.title}</div>
-                { book.authors?
-                <div className='book-authors'>{book.authors}</div>
+                {book.imageLinks ?
+                    <div className='book-cover' style={{backgroundImage: `url('${book.imageLinks.thumbnail}')` }}></div>
                 :null}
+                <ShelfChange
+                    book={book}
+                    changeShelf={this.props.changeShelf}/>
+            </div>
+            <div className='book-title'>{book.title}</div>
+            { book.authors?
+            <div className='book-authors'>{book.authors}</div>
+            :null}
             </div>
         )
     }
