@@ -1,27 +1,33 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 
 class ShelfChange extends Component{
-    state = {
-      updating: false
+    static propTypes = {
+        book: PropTypes.object.isRequired,
+        changeShelf: PropTypes.func.isRequired
     };
 
-    ShelfChanger(e){
-        this.setState({ updating: true });
-        this.props.changeShelf(this.props.book, e.target.value);
-    }
+    changeShelf = (event) => {
+        this.props.changeShelf(this.props.book, event.target.value);
+        this.setState({
+            currentShelf: event.target.value
+        });
+    };
 
     render(){
-        const { shelf } = this.props.book;
         return(
-            <div className="book-shelf-changer">
-                <select value={shelf} onChange={this.ShelfChanger.bind(this)}>
-                    <option value="none" disabled>Move to...</option>
-                    <option value="currentlyReading">Currently Reading</option>
-                    <option value="wantToRead">Want to Read</option>
-                    <option value="read">Read</option>
-                    <option value="none">None</option>
+            <div className='book-shelf-changer'>
+                <select
+                    value={this.props.book.shelf}
+                    onChange={this.changeShelf}
+                >
+                    <option value='move' disabled>Move to...</option>
+                    <option value='currentlyReading'>Currently Reading</option>
+                    <option value='wantToRead'>Want to Read</option>
+                    <option value='read'>Read</option>
+                    <option value='none'>None</option>
                 </select>
-                {this.state.updating && (<div className="cssload-spin-box"/>)}
             </div>
         )
     }

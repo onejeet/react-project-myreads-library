@@ -61,6 +61,24 @@ body, .app {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   font-size: 0;
 }
+.close-button {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+}
+.close-button a {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: yellow;
+  background-image: url('./icons/cancel.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  font-size: 0;
+}
 
 /* search page */
 
@@ -166,6 +184,9 @@ body, .app {
 .book-cover {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: #eee;
+  width: 128px;
+  height: 160px;
+  background-size: cover;
 }
 .book-cover-title {
   padding: 20px 10px 0;
