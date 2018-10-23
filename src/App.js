@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import Shelf from './Shelf';
 import Search from './Search';
@@ -9,7 +9,7 @@ import './App.css';
 class BooksApp extends React.Component {
     state = {
         books: [],
-        searchBooks: []
+        searchBooks: [],
     };
 
     componentDidMount() {
@@ -32,31 +32,31 @@ class BooksApp extends React.Component {
         });
     };
 
-    updateSearchResult = (query) => {
-        if(query){
-            BooksAPI.search(query).then((books) => {
+    updateSearchResult = (value) => {
+        if(value.length>0){
+            BooksAPI.search(value).then((books) => {
                 if(books.length > 0){
                     books.forEach((book, index) => {
                         let theBook = this.state.books.find((x) => (x.id === book.id));
                         book.shelf = theBook ? theBook.shelf : 'none';
                         books[index] = book;
                     });
-
                     this.setState({
                         searchBooks: books
                     });
                 }
             });
             } else {
-            this.setState({
-                searchBooks: []
-            });
+                this.setState({
+                    searchBooks: []
+                });
         }
     };
 
     render() {
         return (
             <div className='app'>
+            <Switch>
                 <Route exact path='/' render={() => (
                     <div className='list-books'>
                         <div className='list-books-title'>
@@ -94,6 +94,7 @@ class BooksApp extends React.Component {
                         changeShelf={this.changeShelf}
                     />
                 )}/>
+            </Switch>
             </div>
         )
     }
